@@ -1,3 +1,4 @@
+#Made an edit - will merge
 class Player
   def initialize(name)
     @strength = rand(0..100)
