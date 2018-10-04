@@ -1,7 +1,10 @@
+class GroundFloor
 
-class GroundFloor(player)
+  def initialize (player)
+    @player = player
+  end
+
 	@name = "Ground Floor"
-	@player = player
 	def enter
 		puts "You enter the ground floor. [INSERT GENERAL DESCRIPTION]. There is a door at the opposite end of the room. What do you do?"
 		puts "Options: 1. Open door
@@ -15,17 +18,19 @@ class GroundFloor(player)
   			elsif playerinput.include?("look") == true
   				mon = Monsters.new
      		 puts "you see things! A #{mon.enemy} lurks in the corner..." 
-     		 return monsterbattle(mon, player)
+     		 return monsterbattle(mon, @player)
   			else
     		puts "something"
     		puts playerinput.include?("look")
     	end
   	end
+
+
   	
-  	def monsterbattle(mon, p1)
-  		puts "The #{mon.enemy} slowly approaches you. What will you do?"
+  def monsterbattle(mon, p1)
+  	puts "The #{mon.enemy} slowly approaches you. What will you do?"
   		puts "Options: Run, Fight, Nothing"
-  		print '> '
+  	print '> '
 
   		playerinput = gets.chomp.downcase
 
@@ -37,13 +42,12 @@ class GroundFloor(player)
   			print '> '
   			playerinput = gets.chomp.downcase
   			when "fight"
-  			puts "You draw your #{p1.weapon} and steel yourself for battle"
-  			p1.attk
-
+  		  puts "You draw your #{p1.weapon} and steel yourself for battle"
+  		  p1.attk
   			when "nothing"
-  			puts
+  		    puts "test"
   			else
-  			puts 	
+  		puts 	"test"
   		end
   	end
 	#nextroom = SecondFloor.new

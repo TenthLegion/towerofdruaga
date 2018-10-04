@@ -1,12 +1,12 @@
 #Made an edit - will merge
 class Player
   def initialize(name)
-    @strength = rand(0..100)
-    @defense = rand(0..100) 
+    @strength = rand(20..100)
+    @defense = rand(20..100) 
     @name = name
     @health = rand(30..150)
     @weapon = nil
-    @level = rand(1..5)
+    @level = 5
     @alive = true 
     @power = 
       if @weapon == "sword"
@@ -28,8 +28,9 @@ class Player
     # if @weapon.blank?
     #puts "power is blank"
     #end 
-
-   return dmg = (((2*@level)/5)*(@power * (@strength/@defense))/12)
+    puts "this is the attk method."
+   #dmg = (((2*@level)/5)*(@power * (@strength/@defense))/12)
+   dmg = ((2*@level)*(@power * (@strength/@defense))/12)
    puts "damage dealt is: #{dmg}"
    #puts "You do #{@dmg} points of damage!"
   end
