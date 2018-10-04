@@ -45,7 +45,7 @@ class GroundFloor
   		  puts "You draw your #{p1.weapon} and steel yourself for battle"
   		  p1.attk
   			when "nothing"
-  		    puts "test"
+  		    puts "The #{mon} stalks toward you. In a flash, "
   			else
   		puts 	"test"
   		end
