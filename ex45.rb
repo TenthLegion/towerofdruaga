@@ -67,17 +67,9 @@ unless p1.alive == false
   floor1 =  GroundFloor.new(p1)
   floor1.enter
   #puts mon.monsterweapon
-
-
-
-
-
  end 
 
-def end
-    exit(1)
-  
-  end
+
 
 
 #puts "your weapon is: #{p1.weapon}"

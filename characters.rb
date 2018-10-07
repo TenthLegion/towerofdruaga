@@ -18,64 +18,84 @@ class Player
       else 
         power = 20
       end
-          
-
   end
+
+  def lose
+    puts "Game over!"
+  end
+
   #weapon = {"sword" => Sword.new, "axe" => Axe.new}
   #puts weapon
-  def attk #(attack, defense, power, level)
-    #weapon = nil
-    # if @weapon.blank?
-    #puts "power is blank"
-    #end 
-    puts "this is the attk method."
-   #dmg = (((2*@level)/5)*(@power * (@strength/@defense))/12)
-   dmg = ((2*@level)*(@power * (@strength/@defense))/12)
-   puts "damage dealt is: #{dmg}"
-   #puts "You do #{@dmg} points of damage!"
+  
+  case @health
+  when @health == 0
+    @alive = false
+  else
+    @alive = true
   end
+
 
   attr_accessor :health
   attr_accessor :power
   attr_accessor :weapon
   attr_accessor :alive
-  
-
-  
+  attr_accessor :level
+  attr_accessor :strength
+  attr_accessor :defense
 end
 
+def attk(attacker) 
+   puts "this is the attk method."
+   dmg = ((2*attacker.level)*(attacker.power*(attacker.strength/attacker.defense))/6)
+    if dmg <= 25
+      dmg = 25
+    end
+
+   puts "damage dealt is: #{dmg}"
+   return dmg
+end
 
 
 
 class Monsters
   def initialize
-		@strength = rand(20..100)
-		@defense = rand(20..100)
 		@type = ["Skeleton", "Sentaur", "Vampire"]
+    @enemy = @type[rand(0..@type.length-1)]
+    @level = 7
+    if @enemy == "Skeleton"
+       @health = 100
+      elsif @enemy == "Sentaur"
+       @health = 150
+      else
+       @health = 200
+    end
+
+    if @health.to_i <= 0
+        @alive = false
+     else
+      @alive = true
+    end
+    @strength = rand(20..100)
+		@defense = rand(20..100)
+		
 	  @weapon = [Axe.new, Sword.new,Daggers.new]
-		@enemy = @type[rand(0..@type.length-1)]
-		#@health = #rand(20..100)
-		if @enemy == "Skeleton"
-			 @health = 100
-		  elsif @enemy == "Sentaur"
-			 @health = 150
-		  else
-			 @health = 200
-		end
+		
 		@monsterweapon = @weapon[rand(0..@weapon.length-1)]
+    
+    if monsterweapon == Axe.new
+      @power = 75
+    elsif monsterweapon == Sword.new
+      @power = 95
+    else
+    @power = 65   
+    end
+
 	end
 
   #Only use attr_accessor when you need a getter AND a setter 
   #and use attr_reader when you only need a getter
+	attr_accessor :monsterweapon, :alive, :enemy, :health, :level, :power, :strength, :defense
 
 
-	attr_accessor :monsterweapon
-	attr_accessor :health
-  attr_accessor :enemy
-
-  def self.monwep
-    # Return the value of this variable
-    return @monsterweapon
-  end
 end
 
