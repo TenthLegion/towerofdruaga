@@ -1,11 +1,9 @@
 class Axe
-	puts "this is axe"
 	@power = 85
 	attr_accessor :power
 	end
 
 class Sword
-	puts 'this is a Sword'
 	@power = 100
 	@name = "sword"
 	def setpower
@@ -17,7 +15,6 @@ class Sword
 end
 
 class Daggers
-	puts "this is dagger"
 	@power = 75
 	attr_accessor :power
 end

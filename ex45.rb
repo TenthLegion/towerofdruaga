@@ -7,20 +7,25 @@ load 'characters.rb'
 load 'floors.rb'
 load 'weapons.rb'
 
-def start
-	puts "text introduction to game."
-	something = gets.chomp
-	case something
-	when "asdf"
-		GroundFloor.new
-	else
-		puts "this did not work"
-	end
-
+def notetoself
+ puts "NOTES TO SELF:"
+  puts "- Find way to take new input after 'Run' and start the other conditions."
+  puts "- Find way to initialize the second floor after Fight has been won."
+  puts "- clean up all stray notes in the code."
+  puts "- Figure out why begin doesn't work."
 end
 
 
+input = gets.chomp.downcase
 
+if input == "note"
+  notetoself
+else input != "note"
+  begin
+end
+
+
+def begin
 puts "Game Master: Welcome to the tower of Druaga! Many dangers and challenges await you from here. What is your name?"
 print "> "
 player_name = $stdin.gets.chomp
@@ -59,41 +64,10 @@ case proceedYN
 end
 
 
-#if proceedYN == "yes"
- # GroundFloor.new
-#end
 
 unless p1.alive == false
   floor1 =  GroundFloor.new(p1)
   floor1.enter
   #puts mon.monsterweapon
  end 
-
-
-
-
-#puts "your weapon is: #{p1.weapon}"
-#puts "your power is: #{p1.power}"
-
-#puts p1.instance_variable_get(:@weapon)
-#puts p1.instance_variable_get(:@power)
-#puts "this is weapon power: #{p1.weaponpower.inspect}"
-#puts "this is weapon: #{p1.weapon.instance_variable_get("@@name")}"
-#puts @weapon.instance_variable_get(:@name)
-#puts weapon.nil? 
-
-#puts "damage is : #{p1.attk}"
-
-#user = Player.new
-#puts user.inspect
-
-#start
-
-
-
-
-#me = Monsters.new
-#puts me.inspect + "\n"
-#puts "your health score is: #{me.health}"
-#puts me.@monsterweapon.@attack.inspect
-
+end
