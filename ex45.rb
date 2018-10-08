@@ -12,7 +12,7 @@ def notetoself
   puts "- Find way to take new input after 'Run' and start the other conditions."
   puts "- Find way to initialize the second floor after Fight has been won."
   puts "- clean up all stray notes in the code."
-  puts "- Figure out why begin doesn't work."
+  puts "- Figure out why i cant put the start stuff in a method called start."
 end
 
 
@@ -21,11 +21,11 @@ input = gets.chomp.downcase
 if input == "note"
   notetoself
 else input != "note"
-  begin
-end
+  
 
 
-def begin
+
+
 puts "Game Master: Welcome to the tower of Druaga! Many dangers and challenges await you from here. What is your name?"
 print "> "
 player_name = $stdin.gets.chomp
@@ -44,10 +44,6 @@ case proceedYN
         case chooseweapon
           when "sword"
             p1.weapon = "sword"
-          #p1.instance_variable_set(:@weapon, Sword.new)
-           # if p1.weapon.instance_of?(Sword)
-            #  p1.weaponpower.setpower
-            #end
             when "axe"
               p1.weapon = "axe"
             when "daggers" || "dagger"
@@ -63,11 +59,10 @@ case proceedYN
     exit(1)
 end
 
-
-
 unless p1.alive == false
   floor1 =  GroundFloor.new(p1)
   floor1.enter
   #puts mon.monsterweapon
  end 
+
 end
