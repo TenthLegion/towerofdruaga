@@ -12,6 +12,7 @@ def notetoself
   puts "- Find way to initialize the second floor after Fight has been won."
   puts "- Figure out why the mon.monsterweapon produces 'Its gnarled #<Sword:0x007fdafa0c2448> cuts you down.' instead of weapon name."
   puts "- Clean up excess puts in the attk method."
+  puts "- consider retooling the damage calculator as it seems having a high defense is lowering the ultimate dmg stat."
   10.times do print "#" end
     puts "\n"
   puts "- clean up all stray notes in the code."
