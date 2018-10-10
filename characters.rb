@@ -46,17 +46,28 @@ end
 end
 
 def attk(attacker) 
-   puts "this is the attk method."
+   
    dmg = ((2*attacker.level)*(attacker.power*(attacker.strength/attacker.defense))/6)
     if dmg <= 25
       dmg = 25
     end
 
-   puts "damage dealt is: #{dmg}"
+   
    return dmg
 end
 
+def monattk(attacker) 
+   dmg = ((2*attacker.level)*(attacker.power*(attacker.strength/attacker.defense))/6)
+    if dmg <= 25
+      dmg = 25
+    end
 
+  if dmg >=101
+    dmg = 50
+  end
+
+   return dmg
+end
 
 class Monsters
   def initialize

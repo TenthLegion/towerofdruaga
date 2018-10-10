@@ -7,7 +7,7 @@ def battlesequence(mon, p1)
             mon.health -= damage
             puts "The #{mon.enemy} has #{mon.health} hit points left!"
 
-            mondmg = attk(mon)
+            mondmg = monattk(mon)
             puts "#{mon.enemy} attacks you with its full might, doing #{mondmg} points of damage"
             p1.health -= mondmg
             puts "You have #{p1.health} hit points left!"
@@ -49,7 +49,7 @@ class Battles
             if mon.alive == false
             puts "Your battle cry echoes throughout the hollow cavern. With a final swing of your #{p1.weapon} you the beast's life."
             puts "The door off in the distance creaks open and you pass through."
-            return SecondFloor.new
+            return secondfloor(p1)
             end
           
         when "nothing"
@@ -72,7 +72,7 @@ class GroundFloor < Battles
 
 
 
-    
+
   end
 
 	@name = "Ground Floor"
@@ -101,8 +101,9 @@ class GroundFloor < Battles
   	end
 
 
-	def secondfloor
-    SecondFloor.new
+def secondfloor(p1)
+    secondfloor = SecondFloor.new(p1)
+    secondfloor.enter
   end
 end
 
@@ -110,16 +111,13 @@ def bossfloor
   BossRoom.new
 end
 
-
-
-
-
-
-
 class SecondFloor
 	def initialize (player)
     @player = player
     puts "this is second floor"
+  end
+  def enter
+    puts "this is enter"
   end
 end
 
@@ -131,4 +129,3 @@ def Map
 	@@rooms = {"Ground Floor" => GroundFloor.new, "Second Floor" => SecondFloor.new, "Boss Room" => BossRoom.new}
 end
 
-#start

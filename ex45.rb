@@ -1,8 +1,6 @@
 
 #Tower of Druaga (or something similar)
 
-#5 floors - each with a boss
-#us
 load 'characters.rb'
 load 'floors.rb'
 load 'weapons.rb'
