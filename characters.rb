@@ -4,7 +4,7 @@ class Player
     @strength = rand(20..100)
     @defense = rand(20..100) 
     @name = name
-    @health = rand(30..150)
+    @health = 175
     @weapon = nil
     @level = 5
     @alive = true 
@@ -22,6 +22,7 @@ class Player
 
   def lose
     puts "Game over!"
+    exit(1)
   end
 
   #weapon = {"sword" => Sword.new, "axe" => Axe.new}
@@ -34,14 +35,14 @@ class Player
     @alive = true
   end
 
+case @alive
+when @alive == false
+  puts "Game over!"
+  exit(1)
+end
 
-  attr_accessor :health
-  attr_accessor :power
-  attr_accessor :weapon
-  attr_accessor :alive
-  attr_accessor :level
-  attr_accessor :strength
-  attr_accessor :defense
+  attr_accessor :health, :power, :weapon, :alive, :level, :strength, :defense
+
 end
 
 def attk(attacker) 
@@ -62,14 +63,18 @@ class Monsters
 		@type = ["Skeleton", "Sentaur", "Vampire"]
     @enemy = @type[rand(0..@type.length-1)]
     @level = 7
-    if @enemy == "Skeleton"
-       @health = 100
-      elsif @enemy == "Sentaur"
-       @health = 150
-      else
-       @health = 200
-    end
 
+    #Selection of the monster's health
+    @healthHash = {"Skeleton" => 100, "Sentaur" => 150, "Vampire" => 200}
+    @health = @healthHash[@enemy]
+
+    #if @enemy == "Skeleton"
+     #  @health = 100
+      #elsif @enemy == "Sentaur"
+       #@health = 150
+      #else
+      # @health = 200
+    #end
     if @health.to_i <= 0
         @alive = false
      else

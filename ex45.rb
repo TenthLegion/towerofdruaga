@@ -10,9 +10,15 @@ load 'weapons.rb'
 def notetoself
  puts "NOTES TO SELF:"
   puts "- Find way to take new input after 'Run' and start the other conditions."
+  puts "- Finish the Nothing Scenario"
   puts "- Find way to initialize the second floor after Fight has been won."
+  puts "- Figure out why the mon.monsterweapon produces 'Its gnarled #<Sword:0x007fdafa0c2448> cuts you down.' instead of weapon name."
+  puts "- Clean up excess puts in the attk method."
+  10.times do print "#" end
+    puts "\n"
   puts "- clean up all stray notes in the code."
   puts "- Figure out why i cant put the start stuff in a method called start."
+
 end
 
 

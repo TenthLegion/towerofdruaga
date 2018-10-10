@@ -1,23 +1,5 @@
-class Battles
-  def monsterbattle(mon, p1)
-    puts "The #{mon.enemy} slowly approaches you. What will you do?"
-    puts "Options: Run, Fight, Nothing"
-    print '> '
-    playerinput = gets.chomp.downcase
-
-      
-      case playerinput
-        when "run"
-          puts "you attempt to run back to the entrace of the tower, but the gate is locked. 
-          You hurriedly look behind you only to find #{mon.enemy} staring back at you."
-          puts "What will you do?"
-          print '> '
-          playerinput = gets.chomp.downcase
-
-          #NOTE TO SELF: FIND A WAY TO ACCEPT FIGHT OR NOTHING AND EXECUTE THOSE CASES BELOW --->
-
-        when "fight"
-          puts "You draw your #{p1.weapon} and steel yourself for battle"
+def battlesequence(mon, p1)
+  puts "You draw your #{p1.weapon} and steel yourself for battle"
           until  p1.health <= 0 || mon.health <= 0
             puts "monster power is #{mon.power}"
             damage = attk(p1)
@@ -29,8 +11,30 @@ class Battles
             puts "#{mon.enemy} attacks you with its full might, doing #{mondmg} points of damage"
             p1.health -= mondmg
             puts "You have #{p1.health} hit points left!"
+          end
+        end
+
+
+
+class Battles
+  def monsterbattle(mon, p1)
+    puts "The #{mon.enemy} slowly approaches you. What will you do?"
+    puts "Options: Run, Fight, Nothing"
+    print '> '
+    playerinput = gets.chomp.downcase
+
+      case playerinput
+        when "run"
+          puts "you attempt to run back to the entrace of the tower, but the gate is locked. 
+          You hurriedly look behind you only to find #{mon.enemy} staring back at you."
+          puts "Its gnarled #{mon.monsterweapon} cuts you down. "
+          p1.health -= 25
+          puts "You lose 25 points of health. health is #{p1.health}"
+          battlesequence(mon, p1)
           
-            if mon.health <= 0
+        when "fight"
+          battlesequence(mon, p1)
+           if mon.health <= 0
               mon.alive = false
             end
 
@@ -47,15 +51,16 @@ class Battles
             puts "The door off in the distance creaks open and you pass through."
             return SecondFloor.new
             end
-          end
+          
         when "nothing"
           puts "The #{mon.enemy} stalks toward you. In a flash, "
       else
-          puts  "test"
+          puts  "You've waited too long. The #{mon.enemy} destroys you."
+          p1.lose
       end
+      
     end
 end
-
 
 
 
@@ -64,13 +69,16 @@ class GroundFloor < Battles
 
   def initialize (player)
     @player = player
+
+
+
+    
   end
 
 	@name = "Ground Floor"
 	def enter
 		puts "You enter the ground floor. [INSERT GENERAL DESCRIPTION]. There is a door at the opposite end of the room. What do you do?"
-		puts "Options: 1. Open door
-		2. Look around"
+		puts "Options: \n 1. Open door \n 2. Look around"
 		print '> '
  		playerinput = gets.chomp.downcase
   		
@@ -78,7 +86,7 @@ class GroundFloor < Battles
       		puts "you make for the door, but a creature approaches you from the shadows!"
       		mon = Monsters.new
           puts "There is a rumbling just out of sight!"
-          puts "You turn too slowly, as #{mon.enemy} aims its #{mon.monweapon} at your throat!"
+          puts "You turn too slowly, as #{mon.enemy} aims its #{mon.monsterweapon} at your throat!"
           puts "It's attack grazes your cheek and you take 25 points of damage. A battle has begun. You take a deep breath."
           @player.health -= 25
           return monsterbattle(mon, @player)
@@ -98,6 +106,9 @@ class GroundFloor < Battles
   end
 end
 
+def bossfloor
+  BossRoom.new
+end
 
 
 
@@ -106,7 +117,8 @@ end
 
 
 class SecondFloor
-	def initialize 
+	def initialize (player)
+    @player = player
     puts "this is second floor"
   end
 end
