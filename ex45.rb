@@ -7,6 +7,7 @@ load 'weapons.rb'
 
 def notetoself
  puts "NOTES TO SELF:"
+  puts "- CANT GET BOSSROOM TO RUN FLOORS 132"
   puts "- Find way to take new input after 'Run' and start the other conditions."
   puts "- Finish the Nothing Scenario"
   puts "- Find way to initialize the second floor after Fight has been won."

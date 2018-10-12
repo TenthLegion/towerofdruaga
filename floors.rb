@@ -69,10 +69,6 @@ class GroundFloor < Battles
 
   def initialize (player)
     @player = player
-
-
-
-
   end
 
 	@name = "Ground Floor"
@@ -107,25 +103,46 @@ def secondfloor(p1)
   end
 end
 
-def bossfloor
-  BossRoom.new
+def bossfloor(player)
+  bar = BossRoom.new(player)
+  bar.enter
 end
 
 class SecondFloor
 	def initialize (player)
     @player = player
-    puts "this is second floor"
+    puts "Game Master: You have somehow managed to reach to the second floor."
+    #enter
   end
   def enter
-    puts "this is enter"
+    puts "Game Master: The room is dark. A faint light flickers in the distance.\n What do you do?"
+    puts "Options:\n Walk to the open doors \n look aroud \n"
+    print "> "
+    playerinput = gets.chomp.downcase
+
+    if playerinput.include?("walk")
+      puts "GM: You proceed to the door unempeded. You enter the final room."
+     var = BossRoom.new(player)
+    elsif playerinput.include?("look")
+        puts "GM: There sits a case in the corner. You carefully open it, finding a health potion."
+        @player.health += 100
+        puts "GM: The potion restores 100 points of health. Your health is now #{@player.health}."
+        puts "GM: You proceed to through the door leading to the final area."
+       return bossfloor(@player)
+       var.enter
+      else puts "GM: Your adventure is over."
+        exit(1)
+      end
+
   end
 end
 
 
 def BossRoom
+  
+def enter
+  puts "entered"
 end
 
-def Map 
-	@@rooms = {"Ground Floor" => GroundFloor.new, "Second Floor" => SecondFloor.new, "Boss Room" => BossRoom.new}
 end
 

@@ -57,10 +57,11 @@ def attk(attacker)
 end
 
 def monattk(attacker) 
-   dmg = ((2*attacker.level)*(attacker.power*(attacker.strength/attacker.defense))/6)
-    if dmg <= 25
-      dmg = 25
-    end
+   #dmg = ((2*attacker.level)*(attacker.power*(attacker.strength/attacker.defense))/6)
+    dmg = 6
+   # if dmg <= 25
+    #  dmg = 25
+    #end
 
   if dmg >=101
     dmg = 50
