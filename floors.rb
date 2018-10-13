@@ -1,16 +1,14 @@
 def battlesequence(mon, p1)
   puts "You draw your #{p1.weapon} and steel yourself for battle"
           until  p1.health <= 0 || mon.health <= 0
-            puts "monster power is #{mon.power}"
             damage = attk(p1)
-            puts "You swing your weapon doing #{damage} points of damage to the #{mon.enemy}"
+            puts "GM: You swing your weapon doing #{damage} points of damage to the #{mon.enemy}"
             mon.health -= damage
-            puts "The #{mon.enemy} has #{mon.health} hit points left!"
-
+            puts "GM: The #{mon.enemy} has #{mon.health} hit points left!"
             mondmg = monattk(mon)
-            puts "#{mon.enemy} attacks you with its full might, doing #{mondmg} points of damage"
+            puts "GM: #{mon.enemy} attacks you with its full might, doing #{mondmg} points of damage"
             p1.health -= mondmg
-            puts "You have #{p1.health} hit points left!"
+            puts "GM: You have #{p1.health} hit points left!"
           end
         end
 
@@ -18,18 +16,18 @@ def battlesequence(mon, p1)
 
 class Battles
   def monsterbattle(mon, p1)
-    puts "The #{mon.enemy} slowly approaches you. What will you do?"
+    puts "GM: The #{mon.enemy} slowly approaches you. What will you do?"
     puts "Options: Run, Fight, Nothing"
     print '> '
     playerinput = gets.chomp.downcase
 
       case playerinput
         when "run"
-          puts "you attempt to run back to the entrace of the tower, but the gate is locked. 
+          puts "GM: You attempt to run back to the entrace of the tower, but the gate is locked. 
           You hurriedly look behind you only to find #{mon.enemy} staring back at you."
-          puts "Its gnarled #{mon.monsterweapon} cuts you down. "
+          puts "GM: Its gnarled #{mon.monsterweapon} cuts you down. "
           p1.health -= 25
-          puts "You lose 25 points of health. health is #{p1.health}"
+          puts "GM: You lose 25 points of health. health is #{p1.health}"
           battlesequence(mon, p1)
           
         when "fight"
@@ -47,15 +45,15 @@ class Battles
             p1.lose
             end
             if mon.alive == false
-            puts "Your battle cry echoes throughout the hollow cavern. With a final swing of your #{p1.weapon} you the beast's life."
-            puts "The door off in the distance creaks open and you pass through."
+            puts "GM: Your battle cry echoes throughout the hollow cavern. With a final swing of your #{p1.weapon} you the beast's life."
+            puts "GM: The door off in the distance creaks open and you pass through."
             return secondfloor(p1)
             end
           
         when "nothing"
-          puts "The #{mon.enemy} stalks toward you. In a flash, "
+          puts "GM: The #{mon.enemy} stalks toward you. In a flash, "
       else
-          puts  "You've waited too long. The #{mon.enemy} destroys you."
+          puts  "GM: You've waited too long. The #{mon.enemy} destroys you."
           p1.lose
       end
       
@@ -73,62 +71,73 @@ class GroundFloor < Battles
 
 	@name = "Ground Floor"
 	def enter
-		puts "You enter the ground floor. [INSERT GENERAL DESCRIPTION]. There is a door at the opposite end of the room. What do you do?"
-		puts "Options: \n 1. Open door \n 2. Look around"
+		puts "GM: You enter the ground floor. [INSERT GENERAL DESCRIPTION]. There is a door at the opposite end of the room. What do you do?"
+		puts "GM: Options: Open door OR Look around"
 		print '> '
  		playerinput = gets.chomp.downcase
   		
   		if playerinput.include?("open" || "door") == true
-      		puts "you make for the door, but a creature approaches you from the shadows!"
+      		puts "GM: You make for the door, but a creature approaches you from the shadows!"
       		mon = Monsters.new
-          puts "There is a rumbling just out of sight!"
-          puts "You turn too slowly, as #{mon.enemy} aims its #{mon.monsterweapon} at your throat!"
-          puts "It's attack grazes your cheek and you take 25 points of damage. A battle has begun. You take a deep breath."
+          puts "GM: There is a rumbling just out of sight!"
+          puts "GM: You turn too slowly, as #{mon.enemy} aims its #{mon.monsterweapon} at your throat!"
+          puts "GM: Its attack grazes your cheek and you take 25 points of damage. A battle has begun. You take a deep breath."
           @player.health -= 25
           return monsterbattle(mon, @player)
   		  elsif playerinput.include?("look") == true
     			 mon = Monsters.new
-       		 puts "you see things! A #{mon.enemy} lurks in the corner..." 
+       		 puts "GM: In the darkness, you see a #{mon.enemy}'s eyes begin to shimmer as it recognizes your presence." 
        		 return monsterbattle(mon, @player)
   		  else
-      		puts "something"
-      		puts playerinput.include?("look")
-    	end
+      		puts "GM: You begin to grope around in the darkness. Your hand falls upon a solid mass. Before you know it, you life has ended. Game over."
+          exit(1)
+      		end
   	end
-
-
-def secondfloor(p1)
-    secondfloor = SecondFloor.new(p1)
-    secondfloor.enter
-  end
+  def secondfloor(p1)
+      secondfloor = SecondFloor.new(p1)
+      secondfloor.enter
+    end
 end
 
-def bossfloor(player)
-  bar = BossRoom.new(player)
-  bar.enter
-end
+
 
 class SecondFloor
 	def initialize (player)
     @player = player
-    puts "Game Master: You have somehow managed to reach to the second floor."
-    #enter
+    puts "GM: You have somehow managed to reach to the second floor."
+    
+  end
+  def bossfloor(player)
+    bar = BossRoom.new(player)
+    bar.enter
   end
   def enter
-    puts "Game Master: The room is dark. A faint light flickers in the distance.\n What do you do?"
-    puts "Options:\n Walk to the open doors \n look aroud \n"
+    puts "GM: The room is dark. A faint light flickers in the distance.\n What do you do?"
+    puts "Options: Walk to the open doors OR Look aroud"
     print "> "
     playerinput = gets.chomp.downcase
 
     if playerinput.include?("walk")
       puts "GM: You proceed to the door unempeded. You enter the final room."
-     var = BossRoom.new(player)
+     #var = BossRoom.new(player)
+     return bossfloor(@player)
     elsif playerinput.include?("look")
         puts "GM: There sits a case in the corner. You carefully open it, finding a health potion."
         @player.health += 100
         puts "GM: The potion restores 100 points of health. Your health is now #{@player.health}."
+        puts "GM: Wait a moment... you notice a necklace with a rusted pendant."
+        puts "Options: Take it OR proceed through the door?"
+        print "> "
+        takeornot = gets.chomp.downcase
+        case takeornot
+        when "take"
+          puts "GM: You pick up the rusted pendant and string it around your neck. It doesn't look so bad up close."
+          @player.inventory = true
+        when takeornot.include?("proceed" || "door" || "walk")
+          puts "GM: You leave the pendant there."
+        end
         puts "GM: You proceed to through the door leading to the final area."
-       return bossfloor(@player)
+        return bossfloor(@player)
        var.enter
       else puts "GM: Your adventure is over."
         exit(1)
@@ -138,10 +147,40 @@ class SecondFloor
 end
 
 
-def BossRoom
+class BossRoom
   
+def initialize(player)
+  @player = player
+end
+
 def enter
-  puts "entered"
+  puts "GM: You've reached the top floor. Congratu...."
+  puts "GM: Wait, what's that sound?"
+  boss = VampireBoss.new
+  puts "#{boss.name}: Who dares enter here?"
+  print "> "
+  getinput = gets.chomp.downcase
+  puts "#{boss.name}: I do not care. You must leave here or die."
+  puts "Options: Leave OR Stay"
+  print "> "
+  getinput = gets.chomp.downcase
+  if getinput == "stay" && @player.inventory == true
+    puts "GM: #{boss.name} raises his #{boss.weapon} and brings it down upon your head."
+    puts "GM: The blade moves faster than your eyes can see, but it does not hit you. The pendant you picked up begins to shine."
+    puts "#{boss.name}: No! Not the pendant of the king! I am defeated!"
+    puts "GM: #{boss.name} disintegrates!"
+    puts "GM: Congratulations #{@player.name} you have defeated #{boss.name}.The Tower and its riches are yours!"
+    exit(1)
+  elsif getinput == "stay" && @player.inventory == false
+    puts "GM: #{boss.name} raises his #{boss.weapon} and brings it down upon your head."
+    battlesequence(boss, @player)
+    puts "GM: You have lost your life in this battle."
+    exit(1)
+  else
+    puts "GM: You turn your back only to find a sword through your chest."
+    puts "GM: You lose."
+    exit(1)
+  end
 end
 
 end

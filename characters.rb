@@ -8,6 +8,7 @@ class Player
     @weapon = nil
     @level = 5
     @alive = true 
+    @inventory = false
     @power = 
       if @weapon == "sword"
         power = 100
@@ -25,8 +26,6 @@ class Player
     exit(1)
   end
 
-  #weapon = {"sword" => Sword.new, "axe" => Axe.new}
-  #puts weapon
   
   case @health
   when @health == 0
@@ -41,7 +40,7 @@ when @alive == false
   exit(1)
 end
 
-  attr_accessor :health, :power, :weapon, :alive, :level, :strength, :defense
+  attr_accessor :health, :power, :weapon, :alive, :level, :strength, :defense, :name, :inventory
 
 end
 
@@ -57,11 +56,11 @@ def attk(attacker)
 end
 
 def monattk(attacker) 
-   #dmg = ((2*attacker.level)*(attacker.power*(attacker.strength/attacker.defense))/6)
-    dmg = 6
-   # if dmg <= 25
-    #  dmg = 25
-    #end
+   dmg = ((2*attacker.level)*(attacker.power*(attacker.strength/attacker.defense))/6)
+  
+   if dmg <= 25
+      dmg = 25
+    end
 
   if dmg >=101
     dmg = 50
@@ -80,13 +79,7 @@ class Monsters
     @healthHash = {"Skeleton" => 100, "Sentaur" => 150, "Vampire" => 200}
     @health = @healthHash[@enemy]
 
-    #if @enemy == "Skeleton"
-     #  @health = 100
-      #elsif @enemy == "Sentaur"
-       #@health = 150
-      #else
-      # @health = 200
-    #end
+
     if @health.to_i <= 0
         @alive = false
      else
@@ -112,7 +105,30 @@ class Monsters
   #Only use attr_accessor when you need a getter AND a setter 
   #and use attr_reader when you only need a getter
 	attr_accessor :monsterweapon, :alive, :enemy, :health, :level, :power, :strength, :defense
-
-
 end
 
+class VampireBoss
+  def initialize
+    @enemy = "Vampire"
+    @level = 20
+    @health = 300
+    @name = "ALucard"
+
+    if @health.to_i <= 0
+        @alive = false
+     else
+      @alive = true
+    end
+
+    @strength = 150
+    @defense = 150
+    
+    @weapon = "Royal Blade"
+    @power = 250
+
+  end
+
+  #Only use attr_accessor when you need a getter AND a setter 
+  #and use attr_reader when you only need a getter
+  attr_accessor :monsterweapon, :alive, :enemy, :health, :level, :power, :strength, :defense, :name, :weapon
+end
