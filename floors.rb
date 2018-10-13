@@ -89,7 +89,7 @@ class GroundFloor < Battles
        		 puts "GM: In the darkness, you see a #{mon.enemy}'s eyes begin to shimmer as it recognizes your presence." 
        		 return monsterbattle(mon, @player)
   		  else
-      		puts "GM: You begin to grope around in the darkness. Your hand falls upon a solid mass. Before you know it, you life has ended. Game over."
+      		puts "GM: You begin to grope around in the darkness. Your hand falls upon a solid mass. Before you know it, your life has ended. Game over."
           exit(1)
       		end
   	end
